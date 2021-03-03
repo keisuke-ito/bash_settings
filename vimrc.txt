@@ -1,0 +1,143 @@
+" dein.vim settings {{{
+" install dir {{{
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" }}}
+
+" dein installation check {{{
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . s:dein_repo_dir
+endif
+" }}}
+
+" begin settings {{{
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " .toml file
+  let s:rc_dir = expand('~/.vim')
+  if !isdirectory(s:rc_dir)
+    call mkdir(s:rc_dir, 'p')
+  endif
+  let s:toml = s:rc_dir . '/dein.toml'
+
+  " read toml and cache
+  call dein#load_toml(s:toml, {'lazy': 0})
+
+  " end settings
+  call dein#end()
+  call dein#save_state()
+endif
+" }}}
+
+" plugin installation check {{{
+if dein#check_install()
+  call dein#install()
+endif
+" }}}
+
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+" }}}
+
+" シンタックスハイライトの設定
+syntax on
+
+" 自動インデントの設定
+filetype plugin indent on
+
+" --------------------------------------------------------------------
+"  表示設定
+" --------------------------------------------------------------------
+
+" 行番号の表示
+set number
+
+" タイトルを表示
+set title
+
+" エラーメッセージの表示時にびーぷを鳴らさない.
+set noerrorbells
+
+" 対応する括弧やブレースを表示
+set showmatch matchtime=1
+
+" タブ文字をCTRL-Iで表示し、行末に$で表示する
+set list
+
+" 行末のスペースを可視化
+set listchars=tab:^\ ,trail:~
+
+" コメントの色を水色
+hi Comment ctermfg=3
+
+set shiftwidth=2
+
+" 対応する括弧を強調表示
+set showmatch
+
+" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set smartindent
+
+" 勝手に改行させない
+set tw=0
+
+set tabstop=4
+
+set wildmenu
+set history=5000
+
+" マウスの有効化
+if has('mouse')
+	set mouse=a
+	if has('mouse_sgr')
+		set ttymouse=sgr
+	elseif v:version > 703 || v:version is 703 && has('patch632')
+		set ttymouse=sgr
+	else
+		set ttymouse=xterm2
+	endif
+endif
+
+" set colorscheme to molokai.
+colorscheme molokai
+" iTerm2など既に256色環境ならなくても良い
+set t_Co=256
+syntax enable
+
+" lightline setting
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\			  [ 'gitbranch', 'readonly', 'filename', 'modified'] ]
+	\ },
+	\ 'component_function': {
+	\   'gitbranch': 'FugitiveHead'
+	\ },
+	\ }
+
+
+"always display statusline
+set laststatus=2
+" 現在のモードを表示
+set showmode
+" 打ったコマンドをステータスラインの下に表示
+set showcmd
+" ステータスラインの右側にカーソルの現在位置を表示する
+set ruler
+
+" help langage
+set helplang=ja
+
+set encoding=UTF-8
+
+" NERDTree
+nnoremap <silent><C-e> :NERDTree<CR>
