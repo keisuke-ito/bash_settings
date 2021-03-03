@@ -1,0 +1,17 @@
+
+# Bash Prompt
+PS1='\[\e[1;35m\]\u@\h\[\e[0m\]\[\e[32m\]:\[\e[0m\]\[\e[33m\]\w\[\e[0m\]\[\e[32m\]\$ >>\[\e[0m\] '
+
+# 出力の後に改行を入れる
+function add_line {
+  if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
+    PS1_NEWLINE_LOGIN=true
+  else
+    printf '\n'
+  fi
+}
+PROMPT_COMMAND='add_line'
+
+##### alias #####
+alias ls='ls -aF'
+
