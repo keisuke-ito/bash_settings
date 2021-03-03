@@ -1,0 +1,28 @@
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+
+# [[plugins]]
+# repo = 'ryanoasis/nerd-fonts'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
