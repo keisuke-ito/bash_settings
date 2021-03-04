@@ -141,3 +141,6 @@ set encoding=UTF-8
 
 " NERDTree
 nnoremap <silent><C-e> :NERDTree<CR>
+
+" コメント化文字列に#を指定
+autocmd BufNewFile,BufRead *.toml setlocal commentstring=#\ %s
